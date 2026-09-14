@@ -4,8 +4,6 @@ Welcome to the CSM Scheduler Intro Project! This repository contains a scaffolde
 
 ## Project Overview
 
-You act as the engineering team for Computer Science Mentors (CSM). Your goal is to build a simplified version of the **Scheduler**, the tool used by thousands of Berkeley students to enroll in sections.
-
 The project is split into two parts:
 1.  **Backend (Django + PostgreSQL)**: Handles data storage and API logic.
 2.  **Frontend (React + TypeScript + SCSS)**: Provides the user interface for students.
@@ -33,40 +31,20 @@ We have removed complex authentication and attendance.
     - Backend API: [http://localhost:8000/api/](http://localhost:8000/api/)
     - Admin Panel: [http://localhost:8000/admin/](http://localhost:8000/admin/)
     - Frontend: [http://localhost:5173/](http://localhost:5173/)
+      
+### Backend
 
-## Assignment Tasks
+  1. Counter Model:
+      - Task: Create a Counter model with an integer field named count.
+      - The count should start at 0.
+  2. Create a `GET` endpoint that returns the current counter value.
+     - If the counter does not exist, create it with a value of `0`.
+     - Create a `POST` endpoint that increments the counter by one and returns the updated value.
+  3.  Connect both counter endpoints in scheduler/urls.py
 
-Form a team of 4 (2 Backend, 2 Frontend). You should be able to finish this in ~5 hours.
+### Frontend
 
-### Backend Team Tasks
-
-1.  **Section Enrollment Logic**:
-    - The `SectionViewSet` currently exposes generic CRUD.
-    - **Task**: Implement a custom action `enroll` on `SectionViewSet`.
-        - It should accept `name` and `email` in the body.
-        - Validate if the student can enroll (check capacity, check if email is already enrolled in this course).
-        - Create the `Student` object linking to the `Section`.
-        - Return a success message or error.
-2.  **Course Stats API**:
-    - **Task**: Write a new API endpoint using the `@api_view(["GET"])` decorator.
-    - Path: `api/course-capacities/` (or similar).
-    - It should return a list of courses with their current enrollment counts vs capacity (e.g., `[{"course": "CS61A", "enrolled": 50, "capacity": 100}, ...]`).
-        - *Hint*: You'll need to aggregate data from Sections.
-
-### Frontend Team Tasks
-
-1.  **Course Catalog**:
-    - Create a page that lists all available `Courses`.
-    - Clicking a course should show its details.
-2.  **Section Browser & Enrollment**:
-    - When viewing a Course, show a list of associated `Sections`.
-    - Display time, location ("Spacetimes"), and capacity (e.g., "3/5 enrolled").
-    - **Task**: Add an "Enroll" button.
-        - When clicked, prompt the user for their **Name** and **Email** (simple modal or javascript prompt).
-        - Call your Backend's `enroll` endpoint.
-        - Refresh the list to show the new enrollment count.
-3.  *(Optional)* **Stats Integration**:
-    - Display the data from the new `Course Stats API` somewhere on the home page.
+The React frontend is already implemented. No frontend work is required.
 
 ### Collaboration
 
