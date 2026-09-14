@@ -1,4 +1,6 @@
-import './App.scss'
+import axios from "axios";
+  import { useEffect, useState } from "react";
+  import "./App.scss";
 
 // Skeleton for the Navbar
 function Navbar() {
@@ -12,7 +14,6 @@ function Navbar() {
   );
 }
 
-// TODO: Task 3 - Implement the Course Catalog
 // This component should fetch and display courses.
 // Clicking a course should select it.
 function CourseCatalog() {
@@ -20,12 +21,11 @@ function CourseCatalog() {
     <div className="catalog">
       <div className="placeholder-icon">📚</div>
       <h2>Course Catalog</h2>
-      <p>TODO: Fetch and display courses here.</p>
+      <p>Fetch and display courses here.</p>
     </div>
   );
 }
 
-// TODO: Task 4 - Implement the Section Browser
 // This component should display sections for the selected course.
 // It should allow enrolling in a section.
 function SectionBrowser() {
@@ -33,7 +33,34 @@ function SectionBrowser() {
     <div className="sections">
       <div className="placeholder-icon">🗓️</div>
       <h2>Sections</h2>
-      <p>TODO: Select a course to view sections.</p>
+      <p>Select a course to view sections.</p>
+    </div>
+  );
+}
+
+// Finished frontend for testing the counter backend
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  // Get the count when the page loads
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/increment/get")
+      .then((response) => setCount(response.data.count));
+  }, []);
+
+  // Increment the count when the button is clicked
+  const increment = () => {
+    axios
+      .post("http://localhost:8000/api/increment/post")
+      .then((response) => setCount(response.data.count));
+  };
+
+  return (
+    <div className="counter">
+      <h2>Counter</h2>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
     </div>
   );
 }
@@ -57,6 +84,8 @@ function App() {
               <SectionBrowser />
            </div>
         </div>
+
+        <Counter />
         
         <div className="footer-text">
             For Developers: Check <code>src/App.tsx</code> to start implementing components!
